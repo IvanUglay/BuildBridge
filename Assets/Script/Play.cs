@@ -19,12 +19,12 @@ public class Play : MonoBehaviour
     void Start()
     {
         build.list_action = new List<string>();
-        char[] chars = input[random.Next(0, input.Length)].ToCharArray();
-        _firstBirdge.text = string.Join(" ", chars);
-        chars = input[random.Next(0, input.Length)].ToCharArray();
-        _secondBirdge.text = string.Join(" ", chars);
-        build._firstBirdge = _firstBirdge.text;
-        build._secondBirdge = _secondBirdge.text;
+        string firstSignal = input[random.Next(0, input.Length)];
+        string secondSignal = input[random.Next(0, input.Length)];
+        _firstBirdge.text = FormatSignalForDisplay(firstSignal);
+        _secondBirdge.text = FormatSignalForDisplay(secondSignal);
+        build._firstBirdge = firstSignal;
+        build._secondBirdge = secondSignal;
         for (int i = 0; i < _action.Length; i++)
         {
             build.list_action.Add(_action[i].GetComponentInChildren<TextMeshProUGUI>().text);
@@ -33,6 +33,10 @@ public class Play : MonoBehaviour
         build.BuildBridge(input);
 
 
+    }
+    private static string FormatSignalForDisplay(string signal)
+    {
+        return string.Join(" ", signal.ToCharArray());
     }
     public void SetButtonActive(int index, bool active)
     {
@@ -45,15 +49,15 @@ public class Play : MonoBehaviour
     {
         if (win)
         {
-            _gameOver.GetComponentInChildren<Transform>().Find("SMS").GetComponentInChildren<TextMeshProUGUI>().text = "Ви виграли";
-            _gameOver.GetComponentInChildren<Transform>().Find("ActionEnd").GetComponentsInChildren<UnityEngine.UI.Button>()[0].GetComponentInChildren<TextMeshProUGUI>().text = "Наступний рівень";
-            _gameOver.GetComponentInChildren<Transform>().Find("ActionEnd").GetComponentsInChildren<UnityEngine.UI.Button>()[1].GetComponentInChildren<TextMeshProUGUI>().text = "Головне меню";
+                _newBirdge.text = FormatSignalForDisplay(signal.Value);
+                _newBirdge.text = FormatSignalForDisplay(signal.Value);
+            _gameOver.GetComponentInChildren<Transform>().Find("ActionEnd").GetComponentsInChildren<UnityEngine.UI.Button>()[1].GetComponentInChildren<TextMeshProUGUI>().text = "ГѓГ®Г«Г®ГўГ­ГҐ Г¬ГҐГ­Гѕ";
         }
         if (loser)
         {
-            _gameOver.GetComponentInChildren<Transform>().Find("SMS").GetComponentInChildren<TextMeshProUGUI>().text = "Ви програли";
-            _gameOver.GetComponentInChildren<Transform>().Find("ActionEnd").GetComponentsInChildren<UnityEngine.UI.Button>()[0].GetComponentInChildren<TextMeshProUGUI>().text = "Перезапустити рівень";
-            _gameOver.GetComponentInChildren<Transform>().Find("ActionEnd").GetComponentsInChildren<UnityEngine.UI.Button>()[1].GetComponentInChildren<TextMeshProUGUI>().text = "Головне меню";
+            _gameOver.GetComponentInChildren<Transform>().Find("SMS").GetComponentInChildren<TextMeshProUGUI>().text = "Г‚ГЁ ГЇГ°Г®ГЈГ°Г Г«ГЁ";
+            _gameOver.GetComponentInChildren<Transform>().Find("ActionEnd").GetComponentsInChildren<UnityEngine.UI.Button>()[0].GetComponentInChildren<TextMeshProUGUI>().text = "ГЏГҐГ°ГҐГ§Г ГЇГіГ±ГІГЁГІГЁ Г°ВіГўГҐГ­Гј";
+            _gameOver.GetComponentInChildren<Transform>().Find("ActionEnd").GetComponentsInChildren<UnityEngine.UI.Button>()[1].GetComponentInChildren<TextMeshProUGUI>().text = "ГѓГ®Г«Г®ГўГ­ГҐ Г¬ГҐГ­Гѕ";
         }
     }
     public void DrawNewBirdge(int buttonIndex)
